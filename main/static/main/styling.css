@@ -1,0 +1,36 @@
+
+    body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-color: white;
+  height: 500px;
+
+}
+.header {
+  background-color: #f7acb1;
+  text-align: center;
+  padding: 20px;
+}
+
+
+.footer {
+  background-color: black;
+  text-align: center;
+  padding: 5px;
+  font-color: white;
+}
+
+#pcolor{
+  color: white;
+  font-size: 15px;
+
+}
+
+.content{
+  margin-left: 50px;
+  margin-right: 50px;
+  font-color: red;
+}
+.icons{
+  padding: 10px;
+}

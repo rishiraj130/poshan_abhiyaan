@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Medical Intsructor Registration</title>
+    <meta name="viewport" content="width=device-width ,initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'main/ints.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+             <div class="container">
+                 <form  id="register" class="form-horizontal" role="form" enctype="multipart/form-data" method="POST">
+                     {% csrf_token %}
+                     <h2>Medical Instructor Registration</h2>
+                     <div class="form-group">
+                         <label for="firstName" class="col-sm-3 control-label">First Name</label>
+                         <div class="col-sm-9">
+                             <input type="text" id="firstName" placeholder="First Name" class="form-control" name="first_name">
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+                         <div class="col-sm-9">
+                             <input type="text" name="last_name" id="lastName" placeholder="Last Name" class="form-control" name="last_name">
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="birthDate" class="col-sm-4 control-label">Date of Birth</label>
+                         <div class="col-sm-9">
+                             <input type="date" id="birthDate" class="form-control" name="date_of_birth">
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="phoneNumber" class="col-sm-4 control-label">Phone Number</label>
+                         <div class="col-sm-9">
+                             <input for="phoneNumber" type="number" id="phoneNumber" placeholder="Phone number" class="form-control" name="phone_number">
+                             <span class="help-block">Your phone number won't be disclosed anywhere </span>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="aadhaarNumber" class="col-sm-4 control-label">Aadhaar Number</label>
+                         <div class="col-sm-9">
+                             <input type="number" id="aadhaarNumber" placeholder="Aadhaar Number" class="form-control" name="aadhaar_number">
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label class="control-label col-sm-3">Gender</label>
+                         <div class="col-sm-10">
+                             <div class="row">
+                                     <div class="col-sm-4">
+                                         <input type="radio" name="gender" value="Male">Male<br>
+                                     </div>
+                                     <div class="col-sm-4">
+                                         <input type="radio"  name="gender" value="Female">Female<br>
+                                     </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="image" class="col-sm-4 control-label">Profile Image</label>
+                         <div class="col-sm-9">
+                             <input type="file" id="image" name="pic" accept="image/*">
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <label for="degree" class="col-sm-3 control-label">Qualification</label>
+                         <div class="col-sm-9">
+
+                               <select id="degree" name="degree">
+                                  <option value="Post Graduate">Post Graduate</option>
+                                  <option value="Graduate">Graduate</option>
+                                  <option value="Intermediate">Intermediate</option>
+                                  <option value="Others">Others</option>
+                                </select>
+                         </div>
+                     </div> <!-- /.form-group -->
+                     <div class="form-group">
+                         <div class="col-sm-9 col-sm-offset-3">
+                             <span class="help-block">*All fields are mandatory</span>
+                         </div>
+                     </div>
+                     <button type="submit" class="btn btn-primary btn-block">Register</button>
+                     <a href="{% url 'myadmin-page' %}"><button type="button" class="btn btn-secondary btn-block bt">Back to Dashboard</button></a>
+                 </form> <!-- /form -->
+             </div> <!-- ./container -->
+
+             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Incorrect Form Submission</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                     All fields are mandatory
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+               </div>
+             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+             <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+             <script src="{% static 'main/inst.js' %}"></script>
+             <script>
+             $(document).ready(function(){
+                        var registerForm = $("#register")
+                        registerForm.submit(function(event){
+                              var first_name = $("#firstName")
+                              var bool1 = !first_name.val()
+                              var last_name = $("#lastName")
+                              var bool2 = !last_name.val()
+                              var date_of_birth =  $("#birthDate")
+                              var bool3 = !date_of_birth.val()
+                              var phone = $("#phoneNumber")
+                              var bool4 = !phone.val()
+                              var aadhaar_number = $("#aadhaarNumber")
+                              var bool5 = !aadhaar_number.val()
+                              var cat = $("input[name='gender']:checked")
+                              var bool6 = !cat.val()
+                              var image = $("#image")
+                              var bool7 = !image.val()
+
+                              if (bool1 || bool2 || bool3 || bool4 || bool5 || bool6 || bool7){
+                                    event.preventDefault();
+                                    $('#exampleModal').modal('show');
+                                }
+
+
+                        });
+                  });
+           </script>
+  </body>
+</html>

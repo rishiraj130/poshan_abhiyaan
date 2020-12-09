@@ -1,0 +1,39 @@
+.ABC {
+      background-color: #fdd9df;
+      height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    body{
+      background: grey;
+      margin: 0;
+    }
+
+.col{
+    text-align: center;
+}
+.heading{
+    background-color: blue;
+    text-align: center;
+    color: yellow;
+    height: 40px;
+}
+.phone{
+    height: 40px;
+    width: 40px;
+}
+
+.a {
+    color: black;
+}
+.a h1 {
+    color: #0d29f9;
+}
+
+.h {
+    padding-top: 1px;
+    padding-bottom: 0px;
+}
+

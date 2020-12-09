@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POSHAN ABHIYAN PORTAL</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+ <link rel="stylesheet" type="text/css" href="{% static 'main/styling.css' %}">
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="{% static 'main/images/icons/favicon.ico' %}"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/bootstrap/css/bootstrap.min.css'%}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/animate/animate.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/css-hamburgers/hamburgers.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/animsition/css/animsition.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/select2/select2.min.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/vendor/daterangepicker/daterangepicker.css' %}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/util.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/main.css' %}">
+        <!--===============================================================================================-->
+
+</head>
+
+
+<body style="background-color: #666666;">
+
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100">
+        <form class="login100-form validate-form" method="POST">
+           {% csrf_token %}
+          <span class="login100-form-title p-b-43">
+            Enter Login Number
+          </span>
+
+
+          <div class="wrap-input100">
+            <input class="input100" type="text" name="ln">
+            <span class="focus-input100"></span>
+            <span class="label-input100">Login Number</span>
+          </div>
+          {% if error %}
+            <div>Invalid Login Number</div>
+          {% endif %}
+
+
+
+
+
+
+
+          <div class="container-login100-form-btn">
+            <button class="login100-form-btn">
+              Submit
+            </button>
+          </div>
+
+
+        </form>
+
+        <div class="login100-more" style="background-image: url('../static/main/images/bg-01.jpg');">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!--===============================================================================================-->
+ <script src="{% static 'main/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+ <script src="{% static 'main/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+ <script src="{% static 'main/vendor/bootstrap/js/popper.js' %}"></script>
+ <script src="{% static 'main/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+ <script src="{% static 'main/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+ <script src="{% static 'main/vendor/daterangepicker/moment.min.js' %}"></script>
+ <script src="{% static 'main/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+ <script src="{% static 'main/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+ <script src="{% static 'main/js/main.js' %}"></script>
+</html>

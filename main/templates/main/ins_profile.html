@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+          <meta name="viewport" content="width=device-width ,initial-scale=1, shrink-to-fit=no"/>
+          <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}"/>
+          <link rel="stylesheet" href="{% static 'main/profile.css' %}">
+  </head>
+  <body>
+
+<!-- Include the above in your HEAD tag ---------->
+
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img class="img" src="{{ officer.o_image.url }}" alt=""/>
+                            <br>
+                            <br>
+                            <a href="{% url 'all_rooms' %}"><button type="button" class="btn btn-info">Enter Chat Room</button></a>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{ officer.first_name }} {{  officer.last_name }}
+                                    </h5>
+                                    <h6>
+                                        Health Inspector
+                                    </h6>
+                            <ul class="nav nav-tabs abc" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">More</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Registration ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>POSMED{{ officer.officer_id }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ officer.first_name }} {{  officer.last_name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Aadhaar</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ officer.aadhaar }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ officer.phone }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Profession</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Health Inspector</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Gender</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ officer.gender }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Degree</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ officer.degree }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Patients Attending</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ count }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Availability</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                              {% if officer.aval %}
+                                                <p>Yes</p>
+                                              {% else %}
+                                                <p>No</p>
+                                              {% endif %}
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    <a href="{% url 'login-page' %}"><button type="button" class="btn btn-danger btn-lg btn-block">Log Out</button></a>
+                    </div>
+                </div>
+            </form>
+              <div style="margin-left:60px;margin-top:20px"><h4>List of Active Patients</h4></div>
+                                    <div class="row p-5">
+                                        <div class="col-md-12">
+                                            <table class="table">
+                                                <thead>
+                                                   <tr>
+                                                        <th class="border-0 text-uppercase small font-weight-bold">Patient ID</th>
+                                                        <th class="border-0 text-uppercase small font-weight-bold">Patient Name</th>
+                                                         <th class="border-0 text-uppercase small font-weight-bold">Profile</th>
+                                                   </tr>
+                                                </thead>
+                                                <tbody>
+                                                  {% for pat in patients %}
+                                                   <tr>
+                                                         <td>POSPAT{{ pat.patient_id }}</td>
+                                                         <td>{{ pat.first_name }} {{ pat.last_name }}</td>
+                                                         <td>
+                                                          <form action="{% url 'pat_profile-page' %}" method="GET">
+                                                              {% csrf_token %}
+                                                                <input type="hidden" name="id" value="{{ pat.patient_id }}">
+                                                                <button class="btn btn-info btn-sm btn-outline-light text-dark" type="submit">View Profile</button>
+                                                          </form>
+                                                        </td>
+                                                   </tr>
+                                                   {% endfor %}
+                                                </tbody>
+                                             </table>
+                                          </div>
+                                      </div>
+            </div>
+     <!-- added-->
+     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+     <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

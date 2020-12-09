@@ -1,0 +1,390 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+          <meta name="viewport" content="width=device-width ,initial-scale=1, shrink-to-fit=no"/>
+          <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}"/>
+          <link rel="stylesheet" href="{% static 'main/patient.css' %}">
+  </head>
+  <body>
+
+<!-- Include the above in your HEAD tag ---------->
+
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img class="img" src="{{ pat.p_image.url }}" alt=""/>
+                            <h5>
+                                {{ pat.first_name }} {{ pat.last_name }}
+                            </h5>
+                            <h6>
+                                Patient
+                            </h6>
+                            <br>
+                            <button type="button" class="btn btn-danger btn-sm btn-block"  data-toggle="modal" data-target="#exampleModal1">Inactivate</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <!-- -->
+                            <ul class="nav nav-tabs abc" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Medical Details</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active back" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Patient ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>POSPAT{{ pat.patient_id }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>  {{ pat.first_name }} {{ pat.last_name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Date of Birth</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ pat.date_of_birth }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Aadhaar Number</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ pat.aadhaar }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ pat.phone }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Category</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ pat.category }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Spouse/ Guardian</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ pat.relation }}</p>
+                                            </div>
+                                        </div>
+                                              <hr>
+                                               <form class="form-horizontal frm" role="form" action="{% url 'pat_profile-page' %}" method="POST">
+                                                 {% csrf_token %}
+                                                  <div class="form-group">
+                                                        <label class="control-label col-sm-5">Dose Taken</label>
+                                                        <div class="col-sm-10">
+                                                            <div class="row">
+                                                                    <div class="col-sm-4">
+                                                                        <input type="radio" name="dose" value="True">YES<br>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <input type="radio" name="dose" value="False">NO<br>
+                                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label for="addDose" class="col-sm-4 control-label">Add Dose</label>
+                                                      <div class="row">
+                                                      <div class="col-sm-8">
+                                                          <input type="date" id="birthDate" class="form-control" name="DOD">
+                                                          <input type="hidden" name="id" value="{{ pat.patient_id }}">
+                                                      </div>
+                                                      <div class="col-sm-4">
+                                                          <input class="btn btn-primary add" type="submit" value="ADD">
+                                                      </div>
+                                                      </div>
+                                                    </div>
+                                                  </form>
+
+                             <button type="button" class="btn btn-danger btn-lg btn-block"  data-toggle="modal" data-target="#exampleModal">Send Alert</button>
+
+
+                         <!-- Modal -->
+                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal-dialog" role="document">
+                             <div class="modal-content">
+                               <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                                 </button>
+                               </div>
+                               <div class="modal-body">
+                                 Do you really want to send the alert to patient with ID POSPAT{{ pat.patient_id }}?
+                               </div>
+                               <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                 <form action="{% url 'send_elert-page' %}" method="POST">
+                                   {% csrf_token %}
+                                  <input type = "hidden" name="id" value="{{ pat.patient_id }}">
+                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                </form>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+
+                         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal-dialog" role="document">
+                             <div class="modal-content">
+                               <div class="modal-header">
+                                 <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                   <span aria-hidden="true">&times;</span>
+                                 </button>
+                               </div>
+                               <div class="modal-body">
+                                 Do you really want to inactivate patient with ID POSPAT{{ pat.patient_id }}?
+                               </div>
+                               <div class="modal-footer">
+                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                 <form action="{% url 'login-page' %}" method="GET">
+                                   {% csrf_token %}
+                                  <input type = "hidden" name="id" value="POSMED{{ pat.medical_instructor.officer_id }}">
+                                  <input type = "hidden" name="pat" value="{{ pat.patient_id }}">
+                                    <button type="submit" class="btn btn-primary">Yes</button>
+                                </form>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+
+
+
+
+                            </div>
+                            <div class="tab-pane fade back" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Height(in Cm)</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ pat.height }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Weight (in KG)</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ pat.weight }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Blood Group</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ pat.blood_group }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Status</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                              {% if pat.status %}
+                                                  <p>Active</p>
+                                              {% else %}
+                                                 <p>Inactive</p>
+                                              {% endif %}
+
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                                <div class="row">
+
+                                                <table class="table table-fixed">
+                                                      <thead>
+                                                      <tr>
+                                                        <th class="col-md-4">Dose</th>
+                                                        <th class="col-md-8">Date</th>
+                                                      </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                      {% for dose in doses %}
+                                                      <tr>
+                                                        {% if dose.status %}
+                                                           <td class="col-md-4">Taken</td>
+                                                        {% else %}
+                                                            <td class="col-md-4"> Not Taken</td>
+                                                        {% endif %}
+                                                        <td class="col-md-8">{{ dose.date_of_dose }}</td>
+                                                      </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                </table>
+
+                                                </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                      <form action="{% url 'login-page' %}" method="GET">
+                          {% csrf_token %}
+                              <input type="hidden" name="id" value="POSMED{{ pat.medical_instructor.officer_id }}">
+                              <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Back">
+                      </form>
+
+                    </div>
+                </div>
+            </form>
+                          <!--
+                            <div class="container">
+                              <div class="row">
+                                    <div class="col-md-4">
+                                        <h6> Doses Assigned (Dates)</h6>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h6 align="center"> Status</h6>
+                                    </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-4">
+                                  <ul class="nav nav-tabs dates" id="myTab" role="tablist">
+                                      <li class="nav-item">
+                                          <a class="nav-link ab active" data-toggle="tab" href="#date1" role="tab" aria-controls="home">10/01/2020</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link ab" data-toggle="tab" href="#date2" role="tab" aria-controls="profile">25/01/2020</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link ab" data-toggle="tab" href="#date3" role="tab" aria-controls="messages">09/02/2020</a>
+                                      </li>
+                                      <li class="nav-item">
+                                          <a class="nav-link ab" data-toggle="tab" href="#date4" role="tab" aria-controls="settings">24/02/2020</a>
+                                      </li>
+                                  </ul>
+                                  </div>
+
+                                <div class="col-md-8">
+                                  <div class="tab-content disp">
+                                      <div class="tab-pane active" id="date1" role="tabpanel">
+                                                    <form class="form-horizontal" role="form">
+                                                      <div class="form-group">
+                                                          <label class="control-label col-sm-3">Dose Taken</label>
+                                                          <div class="col-sm-10">
+                                                              <div class="row">
+                                                                      <div class="col-sm-4">
+                                                                          <input type="radio" name="dose" value="yes">YES<br>
+                                                                      </div>
+                                                                      <div class="col-sm-4">
+                                                                          <input type="radio" name="dose" value="no">NO<br>
+                                                                      </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                    </form>
+                                      </div>
+                                      <div class="tab-pane" id="date2" role="tabpanel">
+                                                    <form class="form-horizontal" role="form">
+                                                      <div class="form-group">
+                                                          <label class="control-label col-sm-3">Dose Taken</label>
+                                                          <div class="col-sm-10">
+                                                              <div class="row">
+                                                                      <div class="col-sm-4">
+                                                                          <input type="radio" name="dose" value="yes">YES<br>
+                                                                      </div>
+                                                                      <div class="col-sm-4">
+                                                                          <input type="radio" name="dose" value="no">NO<br>
+                                                                      </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                    </form>
+                                      </div>
+                                      <div class="tab-pane" id="date3" role="tabpanel">
+                                                    <form class="form-horizontal" role="form">
+                                                      <div class="form-group">
+                                                          <label class="control-label col-sm-3">Dose Taken</label>
+                                                          <div class="col-sm-10">
+                                                              <div class="row">
+                                                                      <div class="col-sm-4">
+                                                                          <input type="radio" name="dose" value="yes">YES<br>
+                                                                      </div>
+                                                                      <div class="col-sm-4">
+                                                                          <input type="radio" name="dose" value="no">NO<br>
+                                                                      </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                    </form>
+                                      </div>
+                                      <div class="tab-pane" id="date4" role="tabpanel">
+                                                    <form class="form-horizontal" role="form">
+                                                      <div class="form-group">
+                                                          <label class="control-label col-sm-3">Dose Taken</label>
+                                                          <div class="col-sm-10">
+                                                              <div class="row">
+                                                                      <div class="col-sm-4">
+                                                                          <input type="radio" name="dose" value="yes">YES<br>
+                                                                      </div>
+                                                                      <div class="col-sm-4">
+                                                                          <input type="radio" name="dose" value="no">NO<br>
+                                                                      </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                    </form>
+                                      </div>
+
+                                                    <form class="form-horizontal back" role="form">
+                                                    <div class="form-group">
+                                                        <label for="addDose" class="col-sm-4 control-label">Add Dose</label>
+                                                        <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <input type="date" id="birthDate" class="form-control">
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <input class="btn btn-primary" type="submit" value="ADD">
+                                                        </div>
+                                                        </div>
+
+                                                    </div>
+                                                    </form>
+
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                            -->
+            </div>
+     <!-- added-->
+     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+     <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

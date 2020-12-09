@@ -1,0 +1,68 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_static %}
+  <link href="{% static 'main/vendor1/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="{% static 'main/css/sb-admin-2.min.css' %}" rel="stylesheet">
+
+  <link href="{% static 'main/contact.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<body>
+
+        <section class="ABC">
+            <div class="row heading">
+                <div class="col">
+                <h2 class="h" >Contact Us</h2>
+                </div>
+            </div>
+             <div class="row a">
+                  <div class="col-xl-4 col">
+
+                  </div>
+                  <div class="col-xl-4 col">
+                    <img src="{% static 'main/pics/address.png' %}">
+                    <h1>Address</h1>
+                    <p>3rd Floor, Jeevan Vihar Building, Sansad Marg, New Delhi - 110001</p>
+                  </div>
+                  <div class="col-xl-4 col">
+
+                  </div>
+
+             </div>
+             <div class="row a">
+                  <div class="col-xl-4 col">
+
+                  </div>
+                  <div class="col-xl-4 col">
+                    <img class="phone" src="{% static 'main/pics/phone1.png' %}">
+                    <h1>Phone</h1>
+                    <p>011 - 23362376, 23368202</p>
+                  </div>
+                  <div class="col-xl-4 col">
+
+                  </div>
+
+             </div>
+             <div class="row a">
+                  <div class="col-xl-4 col">
+
+                  </div>
+                  <div class="col-xl-4 col">
+                    <img src="{% static 'main/pics/gmail.png' %}">
+                    <h1>Email</h1>
+                    <p>poshanabhiyaan@gmail.com</p>
+                  </div>
+                  <div class="col-xl-4 col">
+
+                  </div>
+
+             </div>
+        </section>
+</body>
+{% endblock %}
